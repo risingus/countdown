@@ -7,8 +7,7 @@ export function TimeCard({time, text}) {
   const [animation, setAnimation] = useState();
 
 
-  useEffect((a, b)=> {
-    console.log(a)
+  useEffect(()=> {
     if (time !== oldTime) {
       setAnimation(true)
       setOldTime(time);

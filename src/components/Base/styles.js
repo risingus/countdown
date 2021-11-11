@@ -13,6 +13,7 @@ export const WebContainer = styled.div`
     gap: 4rem;
     animation: infinityBackground 800s linear infinite;
     padding: 2rem 0 0 0;
+    align-items: center;
 
       @keyframes infinityBackground {
         from {

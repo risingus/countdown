@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyles/globalTheme";
 import { webTheme } from "./GlobalStyles/theme";
-import {Base} from './components/Base';
-import { Title } from "./components/Title";
-import { Footer } from "./components/Footer";
+import {useNavigate} from "react-router";
 import moment from 'moment';
-import { DateCountDown } from "./components/DateCountDown";
-
-
+import { CountDonwPage } from "./pages/CountDonwPage";
+import {Routes, Route} from 'react-router-dom';
+import { EditCountDownPage } from "./pages/EditCountDownPage";
 
 function App() {
   const [countDown, setCountDown] = useState({});
+  const [text, setText] = useState("No configuration found 😓");
+  let navigate = useNavigate();
 
   function getRemainingTime(date) {
     const {year, month, day, hour, minute, second} = date
@@ -32,24 +32,73 @@ function App() {
     return dateLeft;
   }
 
+  function handleSaveForm({text, date, time}) {
+    const day = moment(date).get('date');
+    const month = moment(date).get('month');
+    const year = moment(date).get('year');
+    const hour = moment(time).get('hour');
+    const minute = moment(time).get('minute');
+    const second = moment(time).get('second');
+
+    const dateConfig = {
+      year,
+      month,
+      day,
+      hour,
+      minute,
+      second,
+      text
+    }
+
+    localStorage.setItem('countDownConfig', JSON.stringify(dateConfig))
+    setInterval(() => {
+      const dateLeft = getRemainingTime(dateConfig)
+      setCountDown(dateLeft)
+      setText(text)
+    }, 1000);
+
+    
+    navigate('/')
+    document.location.reload()
+
+  }
+
+  function handleCancelForm() {
+    navigate('/')
+  }
+
   useEffect(() => {
-    const day = 15;
-    const month = 11;
-    const year = 2021;
-    const hour = 11;
-    const minute = 0;
-    const date = {
+
+    if (localStorage.getItem('countDownConfig') === null) {
+      setCountDown({})
+      setText("No configuration found 😓")
+      return;
+    }
+
+    const {
+        day, 
+        month, 
+        year, 
+        hour, 
+        minute, 
+        second, 
+        text
+      } = JSON.parse(localStorage.getItem('countDownConfig'))
+
+
+    const dateConfig = {
       year,
       month: month -1,
       day,
       hour,
       minute,
-      second: 0
+      second
     }
 
     setInterval(() => {
-      const dateLeft = getRemainingTime(date)
+      const dateLeft = getRemainingTime(dateConfig)
       setCountDown(dateLeft)
+      setText(text)
     }, 1000);
    
   },  [])
@@ -57,11 +106,18 @@ function App() {
   return (
     <>
       <ThemeProvider theme={webTheme}>
-        <Base>
-          <Title text="WE’RE LAUNCHING SOON" />
-          <Footer />
-          <DateCountDown date={countDown} />
-        </Base>
+        <Routes> 
+          <Route path="/" element={<CountDonwPage countDown={countDown} text={text} />} />
+          <Route 
+            path="/editCountDown" 
+            element={
+              <EditCountDownPage 
+                handleSaveForm={handleSaveForm} 
+                handleCancelForm={handleCancelForm} 
+              />
+            } 
+          />
+        </Routes>
         
       </ThemeProvider>
       <GlobalStyle />

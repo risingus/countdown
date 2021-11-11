@@ -9,6 +9,7 @@ export const webTheme = {
       darkDesaturatedBlue: 'hsl(236, 21%, 26%)',
       veryDarkBlue: 'hsl(235, 16%, 14%)',
       veryDark: '#211d2b',
+      error: '#ff1744'
     }
    
   },
