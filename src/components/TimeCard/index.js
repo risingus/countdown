@@ -17,6 +17,7 @@ export function TimeCard({time, text}) {
         setAnimation(false)
       }, 600);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time])
 
   return (
