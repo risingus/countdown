@@ -1,9 +1,8 @@
 import React from 'react';
 import { FooterContainer } from './styles';
-import { IoLogoFacebook } from 'react-icons/io';
-import { FaPinterest } from 'react-icons/fa';
-import { FaInstagram } from 'react-icons/fa';
-
+import { FaFacebookSquare } from 'react-icons/fa';
+import { FaLinkedin } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 
 
 
@@ -12,30 +11,30 @@ export function Footer() {
   return (
     <FooterContainer>
       <a 
-      href="http://google.com" 
+      href="https://www.facebook.com/gustavo.lima.961556" 
       rel="noreferrer" 
       target="_blank"
       className="footerLink"
       >
-        <IoLogoFacebook className="footerIcon" />
+        <FaFacebookSquare className="footerIcon" />
       </a>
 
       <a 
-      href="http://google.com" 
+      href="https://www.linkedin.com/in/gustavo-lima-44b425b1/" 
       rel="noreferrer" 
       target="_blank"
       className="footerLink"
       >
-        <FaPinterest className="footerIcon" />
+        <FaLinkedin className="footerIcon" />
       </a>
 
       <a 
-      href="http://google.com" 
+      href="https://github.com/risingus" 
       rel="noreferrer" 
       target="_blank"
       className="footerLink"
       >
-        <FaInstagram className="footerIcon" />
+        <FaGithub className="footerIcon" />
       </a>
       
     </FooterContainer>

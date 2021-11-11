@@ -12,16 +12,20 @@ export const WebContainer = styled.div`
     flex-direction: column;
     gap: 4rem;
     animation: infinityBackground 800s linear infinite;
-    padding: 10rem 0 0 0;
+    padding: 2rem 0 0 0;
 
-    @keyframes infinityBackground {
-    from {
-      background-position: 0 0;
-    }
+      @keyframes infinityBackground {
+        from {
+          background-position: 0 0;
+        }
 
-    to {
-      background-position: -100000px 0;
-    }
-  }
+        to {
+          background-position: -100000px 0;
+        }
+      }
+
+      @media (min-width:700px) {
+        padding: 8rem 0 0 0;
+      }
   }
 `;
