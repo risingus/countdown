@@ -3,22 +3,20 @@ import { Base } from "../components/Base";
 import { Title } from "../components/Title";
 import { Footer } from "../components/Footer";
 import { DateCountDown } from "../components/DateCountDown";
-import { NoConfig } from "../components/NoConfig";
+import { SkeletonLoading } from "../components/SkeletonLoading";
 
-export function CountDonwPage({ countDown, text }) {
+export function CountDonwPage({ countDown, text, isLoading }) {
   return (
     <Base>
-      <Title text={text} />
-
-      {
-        Object.keys(countDown).length === 0 ? (
-          <NoConfig />
-        )
-        : (
+      {isLoading ? (
+        <SkeletonLoading />
+      ) : (
+        <>
+          <Title text={text} /> 
           <DateCountDown date={countDown} />
-        )
-      }
-      
+        </>
+      )}
+
       <Footer isEdit={false} />
     </Base>
   );

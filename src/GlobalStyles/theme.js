@@ -1,13 +1,13 @@
 export const webTheme = {
   colors: {
     primary: {
-      grayishBlue: 'hsl(237, 18%, 59%)',
-      softRed: 'hsl(345, 95%, 68%)'
+      grayishBlue: '#8486a9',
+      softRed: '#fb6087'
     },
     neutral: {
-      white: ' hsl(0, 0%, 100%)',
-      darkDesaturatedBlue: 'hsl(236, 21%, 26%)',
-      veryDarkBlue: 'hsl(235, 16%, 14%)',
+      white: '#ffffff',
+      darkDesaturatedBlue: '#343650',
+      veryDarkBlue: '	#1e1f29',
       veryDark: '#211d2b',
       error: '#ff1744'
     }

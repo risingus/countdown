@@ -9,8 +9,8 @@ export function TimeCard({time, text}) {
 
   useEffect(()=> {
     if (time !== oldTime) {
-      setAnimation(true)
       setOldTime(time);
+      setAnimation(true)
 
       setTimeout(() => {
         setAnimation(false)

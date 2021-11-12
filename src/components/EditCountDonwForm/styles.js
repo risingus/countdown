@@ -1,9 +1,6 @@
 import styled from 'styled-components';
-import {
-  DatePicker,
-  TimePicker
-} from '@material-ui/pickers';
-import { TextField } from "@material-ui/core";
+import TextField from '@mui/material/TextField';
+import { lighten } from 'polished';
 
 
 export const StyledForm = styled.form`
@@ -16,82 +13,51 @@ export const StyledForm = styled.form`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+
+    .inputContainer {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
   }
 
   .buttonsContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-
-    .submitButton {
-      height: 2.5rem;
-      background: ${({theme }) => theme.colors.neutral.darkDesaturatedBlue};
-      border: none;
-      border-radius: .4rem;
-      color: ${({theme }) => theme.colors.neutral.white};
-      transition: 0.2s linear;
-
-      :hover {
-        background: ${({theme }) => theme.colors.primary.softRed};
-      }
-    }
   }
 
-  
-
 `;
+
+export const StyledButton = styled.button`
+  height: 2.5rem;
+  background: ${({theme, $disabled }) => $disabled ? 'rgba(144, 144, 144, .1)' : theme.colors.neutral.darkDesaturatedBlue};
+  border: none;
+  border-radius: .4rem;
+  color: ${({theme, $disabled }) => $disabled ? 'gray' : theme.colors.neutral.white};
+  transition: 0.2s linear;
+
+  :hover {
+    background: ${({theme, $disabled }) => $disabled ? 'rgba(144, 144, 144, .1)' :theme.colors.primary.softRed};
+  }
+`;
+
+
 
 export const InputMessage = styled(TextField)`
   &&& {
    
     label {
-      color: ${({theme }) => theme.colors.neutral.white};
+      color: ${({theme, $error }) => $error ? theme.colors.neutral.error : lighten(0.1, '#fb6087')};
     }
 
     .MuiOutlinedInput-notchedOutline {
-      border-color: ${({theme }) => theme.colors.neutral.white};
+      border-color: ${({theme, $error }) => $error ? theme.colors.neutral.error : lighten(0.1, '#fb6087')};
     }
 
     .MuiInputBase-root {
-      color: ${({theme }) => theme.colors.neutral.white};
+      color: ${({theme, $error }) => $error ? theme.colors.neutral.error : lighten(0.1, '#fb6087')};
     }
   }
 `;
-
-export const DateInput = styled(DatePicker)`
-  &&& {
-
-    label {
-      color: ${({theme }) => theme.colors.neutral.white};
-    }
-
-    .MuiOutlinedInput-notchedOutline {
-      border-color: ${({theme }) => theme.colors.neutral.white};
-      color: ${({theme }) => theme.colors.neutral.white};
-    }
-
-    .MuiInputBase-root {
-      color: ${({theme }) => theme.colors.neutral.white};
-    }
-
-  }
-`;
-
-export const TimeInput = styled(TimePicker)`
-  &&& {
-    label {
-      color: ${({theme }) => theme.colors.neutral.white};
-    }
-
-    .MuiOutlinedInput-notchedOutline {
-      border-color: ${({theme }) => theme.colors.neutral.white};
-      color: ${({theme }) => theme.colors.neutral.white};
-    }
-
-    .MuiInputBase-root {
-      color: ${({theme }) => theme.colors.neutral.white};
-    }
-  }
-`;
-
 

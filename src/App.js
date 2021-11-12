@@ -1,27 +1,30 @@
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import { GlobalStyle } from "./GlobalStyles/globalTheme";
-import { webTheme } from "./GlobalStyles/theme";
-import {useNavigate} from "react-router";
 import moment from 'moment';
+import {useNavigate} from "react-router";
 import { CountDonwPage } from "./pages/CountDonwPage";
 import {Routes, Route} from 'react-router-dom';
 import { EditCountDownPage } from "./pages/EditCountDownPage";
+import { GlobalStyle } from "./GlobalStyles/globalTheme";
+import { webTheme } from "./GlobalStyles/theme";
 
 function App() {
+  const navigate = useNavigate();
   const [countDown, setCountDown] = useState({});
-  const [text, setText] = useState("No configuration found 😓");
-  let navigate = useNavigate();
+  const [text, setText] = useState("");
+  const [dateToCount, setDateToCount] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  
 
   function getRemainingTime(date) {
     const {year, month, day, hour, minute, second} = date
     const endDate = new Date(year, month, day, hour, minute, second)
     const now = new Date();
-    const timeLeft = moment(endDate).diff(now)
-    const daysLeft  = moment(timeLeft).get('date')
-    const hoursLeft = moment(timeLeft).get('hour')
-    const minutesLeft = moment(timeLeft).get('minute')
-    const secondsLeft = moment(timeLeft).get('second')
+    const timeLeft = moment(endDate).diff(moment(now))
+    const daysLeft  = moment.duration(timeLeft)._data.days
+    const hoursLeft = moment.duration(timeLeft)._data.hours
+    const minutesLeft = moment.duration(timeLeft)._data.minutes
+    const secondsLeft = moment.duration(timeLeft)._data.seconds
 
     const dateLeft = {
       days: daysLeft,
@@ -29,10 +32,12 @@ function App() {
       minutes: minutesLeft,
       seconds: secondsLeft
     }
+
     return dateLeft;
   }
 
   function handleSaveForm({text, date, time}) {
+    setIsLoading(true)
     const day = moment(date).get('date');
     const month = moment(date).get('month');
     const year = moment(date).get('year');
@@ -50,28 +55,40 @@ function App() {
       text
     }
 
+    const savedData = {
+      date,
+      time
+    }
+
+    setDateToCount(savedData) 
+
     localStorage.setItem('countDownConfig', JSON.stringify(dateConfig))
-    setInterval(() => {
-      const dateLeft = getRemainingTime(dateConfig)
-      setCountDown(dateLeft)
-      setText(text)
-    }, 1000);
 
-    
-    navigate('/')
-    document.location.reload()
-
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000)
+    return;
   }
 
-  function handleCancelForm() {
-    navigate('/')
+  function isDateOld(date) {
+    const {year, month, day, hour, minute, second} = date
+    const countDate = new Date(year, month, day, hour, minute, second)
+    const today = new Date();
+
+    const isAfter = moment(countDate).isAfter(today)
+
+    return isAfter;
   }
 
   useEffect(() => {
 
     if (localStorage.getItem('countDownConfig') === null) {
       setCountDown({})
-      setText("No configuration found 😓")
+
+      setTimeout(() => {
+        navigate('/editCountDown')
+        setIsLoading(false);
+      }, 1000)
       return;
     }
 
@@ -88,32 +105,62 @@ function App() {
 
     const dateConfig = {
       year,
-      month: month -1,
+      month,
       day,
       hour,
       minute,
       second
     }
 
-    setInterval(() => {
+    const isAfter = isDateOld(dateConfig);
+
+    if (!isAfter) {
+      setCountDown({})
+      localStorage.removeItem('countDownConfig')
+
+      setTimeout(() => {
+        navigate('/editCountDown')
+        setIsLoading(false);
+      }, 1000)
+      return;
+    }
+    
+
+    const currentFunction = setInterval(() => {
       const dateLeft = getRemainingTime(dateConfig)
       setCountDown(dateLeft)
       setText(text)
     }, 1000);
-   
-  },  [])
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000)
+    
+
+    return () => clearInterval(currentFunction);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },  [dateToCount])
 
   return (
     <>
       <ThemeProvider theme={webTheme}>
         <Routes> 
-          <Route path="/" element={<CountDonwPage countDown={countDown} text={text} />} />
+          <Route 
+            path="/" 
+            element={
+              <CountDonwPage 
+                countDown={countDown} 
+                text={text} 
+                isLoading={isLoading} 
+              />
+            } 
+          />
           <Route 
             path="/editCountDown" 
             element={
               <EditCountDownPage 
                 handleSaveForm={handleSaveForm} 
-                handleCancelForm={handleCancelForm} 
               />
             } 
           />

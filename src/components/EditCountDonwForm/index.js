@@ -1,29 +1,62 @@
 import React from "react";
-import {
-  MuiPickersUtilsProvider,
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import moment from 'moment';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import usLocale from 'date-fns/locale/en-US';
+import MobileDatePicker from '@mui/lab/MobileDatePicker';
+import MobileTimePicker from '@mui/lab/MobileTimePicker';
+import {useNavigate} from "react-router";
 import {Title} from '../Title'
-import { DateInput, InputMessage, StyledForm, TimeInput } from "./styles";
+import { InputMessage, StyledForm, StyledButton } from "./styles";
 import { useForm, Controller } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InputMessageError } from "../InputMessageError";
 
 
+function isDateNew(date, time) {
+  const day = moment(date).get('date');
+  const month = moment(date).get('month');
+  const year = moment(date).get('year');
+  const hour = moment(time).get('hour');
+  const minute = moment(time).get('minute');
+  const second = moment(time).get('second');
+
+  const formDate = new Date(year, month, day, hour, minute, second)
+  const today = new Date();
+
+  const isAfter = moment(formDate).isAfter(today)
+  console.log(isAfter)
+
+  return isAfter;
+
+}
+
 const countDownSchema = yup.object().shape({
   text: yup
     .string(),
   date: yup
     .date()
+    .nullable()
+    .test(
+      'Test if formDate is after today',
+      'Date must be after today',
+      (_, form) => isDateNew(form.parent.date, form.parent.time) === true 
+    )
     .required('Required *'),
   time: yup
     .date()
-    .required('Obrigatório *'),
+    .nullable()
+    .test(
+      'Test if formDate is after today',
+      'Date must be after today',
+      (_, form) => isDateNew(form.parent.date, form.parent.time) === true 
+    )
+    .required('Required *'),
 });
 
-export function EditCountDownForm({handleSaveForm, handleCancelForm}) {
+export function EditCountDownForm({handleSaveForm}) {
+  let navigate = useNavigate();
   
 
   const {
@@ -38,15 +71,24 @@ export function EditCountDownForm({handleSaveForm, handleCancelForm}) {
   });
   const { errors } = formState;
 
+  function saveForm(values) {
+    handleSaveForm(values)
+    reset()
+    clearErrors()
+    navigate('/')
+  }
+
   function cancelForm() {
     reset()
     clearErrors()
-    handleCancelForm()
+    navigate('/')
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit(handleSaveForm)}>
-      <Title text="CountDown Configuration"/>
+    <StyledForm 
+      onSubmit={handleSubmit(saveForm)} 
+    >
+      <Title text="Set Time and Message"/>
       <div>
         <Controller 
           control={control}
@@ -71,26 +113,22 @@ export function EditCountDownForm({handleSaveForm, handleCancelForm}) {
       </div>
 
       <div className="timeContainer">
-        <MuiPickersUtilsProvider utils={DateFnsUtils} locale={usLocale}>
+        <LocalizationProvider dateAdapter={AdapterDateFns} locale={usLocale}>
 
-          <div>
+          <div className="inputContainer">
             <Controller 
               control={control}
               name="date"
               render={({field: {onChange, value, ref}}) => (
-                <DateInput
-                  inputRef={ref}
-                  inputVariant="outlined"
+                <MobileDatePicker
+                  className="datePicker"
+                  minDate={new Date()}
                   fullWidth
-                  onChange={onChange}
+                  inputRef={ref}
+                  label="Just date"
                   value={value}
-                  ampm={false}
-                  autoOk
-                  size="small"
-                  label="Date"
-                  // disablePast
-                  format="dd/MM/yyyy"
-                  views={['date', 'month', 'year']}
+                  onChange={onChange}
+                  renderInput={(params) => <InputMessage size="small" $error={!!errors.date} {...params}/>}
                 />
               )}
             />
@@ -99,23 +137,19 @@ export function EditCountDownForm({handleSaveForm, handleCancelForm}) {
             )}
           </div>
 
-          <div>
+          <div className="inputContainer">
             <Controller 
               control={control}
               name="time"
               render={({field: {onChange, value, ref}}) => (
-                <TimeInput
-                  inputRef={ref}
-                  onChange={onChange}
-                  value={value}
-                  size="small"
-                  inputVariant="outlined"
+                <MobileTimePicker
+                  views={['hours', 'minutes', 'seconds']}
                   ampm={false}
-                  openTo="hours"
-                  views={["hours", "minutes", "seconds"]}
-                  format="HH:mm:ss"
-                  label="Time"
-                  fullWidth
+                  inputRef={ref}
+                  label="Just time"
+                  value={value}
+                  onChange={onChange}
+                  renderInput={(params) => <InputMessage size="small" $error={!!errors.time} {...params} />}
                 />
               )}
             />
@@ -124,26 +158,27 @@ export function EditCountDownForm({handleSaveForm, handleCancelForm}) {
             )}
             
           </div>
-        </MuiPickersUtilsProvider>
+        </LocalizationProvider>
       </div>
 
 
       <div className="buttonsContainer">
-        <button
+        <StyledButton
+          $disabled={localStorage.getItem('countDownConfig') === null}
+          disabled={localStorage.getItem('countDownConfig') === null}
           className="submitButton"
           type="button" 
           onClick={cancelForm}
         >
           Cancel
-        </button>
+        </StyledButton>
 
-        <button
-          className="submitButton"
+        <StyledButton
           type="button" 
-          onClick={handleSubmit(handleSaveForm)}
+          onClick={handleSubmit(saveForm)}
         >
           Save
-        </button>
+        </StyledButton>
       </div>
 
      
