@@ -3,11 +3,10 @@ import { FooterContainer } from './styles';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa';
+import { FaRegEdit } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-
-
-
-export function Footer() {
+export function Footer({isEdit}) {
   return (
     <FooterContainer>
       <a 
@@ -36,6 +35,16 @@ export function Footer() {
       >
         <FaGithub className="footerIcon" />
       </a>
+
+      {
+        isEdit === false && (
+          <Link alt="Edit CountDown" to="/editCountDown" className="footerLink">
+            <FaRegEdit className="footerIcon" />
+          </Link>
+        )
+      }
+
+     
       
     </FooterContainer>
   )

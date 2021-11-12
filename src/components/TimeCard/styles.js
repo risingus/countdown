@@ -20,26 +20,26 @@ export const CardContainer = styled.div`
           0% {
             transform: rotateX(0deg);
           }
-          10% {
-            transform: rotatex(-180deg);
+          30% {
+            transform: rotatex(90deg);
           }
 
-          70% {
-            transform: rotateX(-180deg);
+          60% {
+            transform: rotatex(180deg);
           }
 
-          80% {
-            transform: rotateX(-270deg);
+          90% {
+            transform: rotatex(270deg);
           }
 
           100% {
-            transform: rotateX(0deg);
+            transform: rotatex(360deg);
           }
         }
 
         ::before {
           content: "";
-          width: 3rem;
+          width: 4rem;
           height: 2rem;
           border-bottom-left-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
@@ -48,13 +48,13 @@ export const CardContainer = styled.div`
           background: ${({ theme }) => theme.colors.neutral.darkDesaturatedBlue};
           margin: 0 0 .05rem 0;
           box-shadow: 0px 6px 0px -3px rgba(0, 0, 0, 0.1);
-          animation: ${({ isAnimated }) => isAnimated && '3s foldCard ease-in-out'};
+          animation: ${({ isAnimated }) => isAnimated && '1s foldCard linear'};
           transform-origin: center bottom;
         }
 
         ::after {
           content: "";
-          width: 3rem;
+          width: 4rem;
           height: 2rem;
           border-bottom-left-radius: 0.4rem;
           border-bottom-right-radius: 0.4rem;
@@ -69,7 +69,7 @@ export const CardContainer = styled.div`
 
           h1 {
             color: ${({ theme }) => theme.colors.primary.softRed};
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin: 0;
           }
         }
