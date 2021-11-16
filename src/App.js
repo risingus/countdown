@@ -7,6 +7,7 @@ import {Routes, Route} from 'react-router-dom';
 import { EditCountDownPage } from "./pages/EditCountDownPage";
 import { GlobalStyle } from "./GlobalStyles/globalTheme";
 import { webTheme } from "./GlobalStyles/theme";
+import { InitialPage } from "./pages/InitialPage";
 
 function App() {
   const navigate = useNavigate();
@@ -86,7 +87,7 @@ function App() {
       setCountDown({})
 
       setTimeout(() => {
-        navigate('/editCountDown')
+        navigate('/')
         setIsLoading(false);
       }, 1000)
       return;
@@ -119,7 +120,7 @@ function App() {
       localStorage.removeItem('countDownConfig')
 
       setTimeout(() => {
-        navigate('/editCountDown')
+        navigate('/')
         setIsLoading(false);
       }, 1000)
       return;
@@ -143,11 +144,16 @@ function App() {
   },  [dateToCount])
 
   return (
-    <>
       <ThemeProvider theme={webTheme}>
         <Routes> 
           <Route 
             path="/" 
+            element={
+              <InitialPage isConfigured={localStorage.getItem('countDownConfig') !== null} />
+            } 
+          />
+          <Route 
+            path="/countDown" 
             element={
               <CountDonwPage 
                 countDown={countDown} 
@@ -157,7 +163,7 @@ function App() {
             } 
           />
           <Route 
-            path="/editCountDown" 
+            path="/edit" 
             element={
               <EditCountDownPage 
                 handleSaveForm={handleSaveForm} 
@@ -165,10 +171,8 @@ function App() {
             } 
           />
         </Routes>
-        
+        <GlobalStyle />
       </ThemeProvider>
-      <GlobalStyle />
-    </>
   );
 }
 

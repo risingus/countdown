@@ -14,6 +14,16 @@ export const GlobalStyle = createGlobalStyle`
       src: url(RedHatText-Regular.ttf) format('truetype');
     }
 
+    ::-moz-selection {
+      color: ${({ theme }) => theme.colors.neutral.white};
+      background: ${({ theme }) => theme.colors.primary.softRed};
+    }
+
+    ::selection {
+      color: ${({ theme }) => theme.colors.neutral.white};
+      background: ${({ theme }) => theme.colors.primary.softRed};
+    }
+
     font-family: redHatBold;
     margin: 0;
     padding: 0;
