@@ -18,14 +18,19 @@ function App() {
   
 
   function getRemainingTime(date) {
-    const {year, month, day, hour, minute, second} = date
-    const endDate = new Date(year, month, day, hour, minute, second)
-    const now = new Date();
-    const timeLeft = moment(endDate).diff(moment(now))
-    const daysLeft  = moment.duration(timeLeft)._data.days
-    const hoursLeft = moment.duration(timeLeft)._data.hours
-    const minutesLeft = moment.duration(timeLeft)._data.minutes
-    const secondsLeft = moment.duration(timeLeft)._data.seconds
+    const {year, month, day, hour, minute, second} = date;
+    const endDate = new Date(year, month, day, hour, minute, second).getTime();
+    const now = new Date().getTime();
+    const timeLeft = endDate - now;
+    const daysLeft  = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    if (timeLeft < 0) {
+      navigate('/');
+    }
+
 
     const dateLeft = {
       days: daysLeft,
@@ -71,16 +76,6 @@ function App() {
     return;
   }
 
-  function isDateOld(date) {
-    const {year, month, day, hour, minute, second} = date
-    const countDate = new Date(year, month, day, hour, minute, second)
-    const today = new Date();
-
-    const isAfter = moment(countDate).isAfter(today)
-
-    return isAfter;
-  }
-
   useEffect(() => {
 
     if (localStorage.getItem('countDownConfig') === null) {
@@ -113,19 +108,6 @@ function App() {
       second
     }
 
-    const isAfter = isDateOld(dateConfig);
-
-    if (!isAfter) {
-      setCountDown({})
-      localStorage.removeItem('countDownConfig')
-
-      setTimeout(() => {
-        navigate('/')
-        setIsLoading(false);
-      }, 1000)
-      return;
-    }
-    
 
     const currentFunction = setInterval(() => {
       const dateLeft = getRemainingTime(dateConfig)
