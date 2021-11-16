@@ -13,11 +13,24 @@ export const FooterContainer = styled.div`
   height: 12rem;
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 1rem;
   align-items: center;
   animation: infinityBackground 600s linear infinite;
 
-  .footerLink {
+  span {
+    color: ${({theme }) => theme.colors.neutral.white};
+    letter-spacing: .1rem;
+  }
+
+  .footerLinks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 2rem;
+
+    .footerLink {
     text-decoration: none;
     margin-top: 4rem;
     
@@ -32,6 +45,9 @@ export const FooterContainer = styled.div`
       }
     }
   }
+
+  }
+
 
   @keyframes infinityBackground {
     from {

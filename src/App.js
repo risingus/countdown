@@ -143,7 +143,6 @@ function App() {
   },  [dateToCount])
 
   return (
-    <>
       <ThemeProvider theme={webTheme}>
         <Routes> 
           <Route 
@@ -165,10 +164,8 @@ function App() {
             } 
           />
         </Routes>
-        
+        <GlobalStyle />
       </ThemeProvider>
-      <GlobalStyle />
-    </>
   );
 }
 

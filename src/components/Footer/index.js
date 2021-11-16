@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom';
 export function Footer({isEdit}) {
   return (
     <FooterContainer>
+
+      <div className="footerLinks">
+
       <a 
       href="https://www.facebook.com/gustavo.lima.961556" 
       rel="noreferrer" 
@@ -44,8 +47,12 @@ export function Footer({isEdit}) {
         )
       }
 
+      </div>
      
-      
+
+    <span>
+      Coded with ❤️ by Gustavo Lima
+    </span>
     </FooterContainer>
   )
 }

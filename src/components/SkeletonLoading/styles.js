@@ -18,7 +18,7 @@ export const SkeletonContainer = styled.div`
       .skeletonTitle {
         border-radius: .4rem;
         height: 1rem;
-        width: 25rem;
+        width: 70vw;
       }
 
     }
@@ -26,7 +26,7 @@ export const SkeletonContainer = styled.div`
   .skeletonCardCointainer {
     display: flex;
     flex-direction: row;
-    gap: 2rem;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
 
@@ -39,8 +39,8 @@ export const SkeletonContainer = styled.div`
   
     .skeletonTimeCardFragmentBotton, .skeletonTimeCardFragmentTop {
       border-radius: .4rem;
-      height: 50px;
-      width: 80px;
+      width: 3.5rem;
+      height: 2rem;
     }
 
     .skeletonTimeCardFragmentTop{
@@ -51,8 +51,38 @@ export const SkeletonContainer = styled.div`
     .skeletonTimeName {
       border-radius: .4rem;
       height: .6rem;
-      width: 3.5rem;
+      width: 3rem;
       margin: .5rem 0 0 0;
     }
+  }
+
+  @media (min-width:700px) {
+    
+    .skeletonTitleContainer {
+      .skeletonTitle {
+        height: 1rem;
+        width: 25rem;
+      }
+
+    }
+
+    .skeletonCardCointainer {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+
+  
+    .skeletonTimeCardFragmentBotton, .skeletonTimeCardFragmentTop {
+      border-radius: .4rem;
+      width: 5rem;
+      height: 3rem;
+    }
+
+    .skeletonTimeName {
+      width: 4rem;
+    }
+  }
   }
 `;

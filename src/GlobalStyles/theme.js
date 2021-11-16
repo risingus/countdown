@@ -9,7 +9,7 @@ export const webTheme = {
       darkDesaturatedBlue: '#343650',
       veryDarkBlue: '	#1e1f29',
       veryDark: '#211d2b',
-      error: '#ff1744'
+      error: '#ff1744',
     }
    
   },

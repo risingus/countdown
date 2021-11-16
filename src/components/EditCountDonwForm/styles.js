@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
-import { lighten } from 'polished';
+import { shade } from 'polished';
 
 
 export const StyledForm = styled.form`
@@ -36,6 +36,7 @@ export const StyledButton = styled.button`
   border-radius: .4rem;
   color: ${({theme, $disabled }) => $disabled ? 'gray' : theme.colors.neutral.white};
   transition: 0.2s linear;
+  cursor: ${({$disabled }) => $disabled !== true && 'pointer'};
 
   :hover {
     background: ${({theme, $disabled }) => $disabled ? 'rgba(144, 144, 144, .1)' :theme.colors.primary.softRed};
@@ -46,17 +47,17 @@ export const StyledButton = styled.button`
 
 export const InputMessage = styled(TextField)`
   &&& {
-   
+
     label {
-      color: ${({theme, $error }) => $error ? theme.colors.neutral.error : lighten(0.1, '#fb6087')};
+      color: ${({theme, $error }) => $error ? theme.colors.neutral.error : shade(0.1, '#fb6087')};
     }
 
     .MuiOutlinedInput-notchedOutline {
-      border-color: ${({theme, $error }) => $error ? theme.colors.neutral.error : lighten(0.1, '#fb6087')};
+      border-color: ${({theme, $error }) => $error ? theme.colors.neutral.error : shade(0.1, '#fb6087')};
     }
 
     .MuiInputBase-root {
-      color: ${({theme, $error }) => $error ? theme.colors.neutral.error : lighten(0.1, '#fb6087')};
+      color: ${({theme, $error }) => $error ? theme.colors.neutral.error : shade(0.1, '#fb6087')};
     }
   }
 `;

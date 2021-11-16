@@ -125,7 +125,7 @@ export function EditCountDownForm({handleSaveForm}) {
                   minDate={new Date()}
                   fullWidth
                   inputRef={ref}
-                  label="Just date"
+                  label="Date"
                   value={value}
                   onChange={onChange}
                   renderInput={(params) => <InputMessage size="small" $error={!!errors.date} {...params}/>}
@@ -145,8 +145,9 @@ export function EditCountDownForm({handleSaveForm}) {
                 <MobileTimePicker
                   views={['hours', 'minutes', 'seconds']}
                   ampm={false}
+                  inputFormat="HH:mm:ss"
                   inputRef={ref}
-                  label="Just time"
+                  label="Time"
                   value={value}
                   onChange={onChange}
                   renderInput={(params) => <InputMessage size="small" $error={!!errors.time} {...params} />}

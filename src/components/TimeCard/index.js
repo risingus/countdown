@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { CardContainer } from './styles';
 
 
@@ -7,7 +7,7 @@ export function TimeCard({time, text}) {
   const [animation, setAnimation] = useState();
 
 
-  useEffect(()=> {
+  useLayoutEffect(()=> {
     if (time !== oldTime) {
       setOldTime(time);
       setAnimation(true)
