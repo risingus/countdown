@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
-import { shade } from 'polished';
 
 
 export const StyledForm = styled.form`
@@ -26,7 +25,6 @@ export const StyledForm = styled.form`
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-
 `;
 
 export const StyledButton = styled.button`
@@ -49,16 +47,15 @@ export const InputMessage = styled(TextField)`
   &&& {
 
     label {
-      color: ${({theme, $error }) => $error ? theme.colors.neutral.error : shade(0.1, '#fb6087')};
+      color: ${({theme, $error }) => $error ? theme.colors.neutral.error : theme.colors.neutral.white};
     }
 
     .MuiOutlinedInput-notchedOutline {
-      border-color: ${({theme, $error }) => $error ? theme.colors.neutral.error : shade(0.1, '#fb6087')};
+      border-color: ${({theme, $error }) => $error ? theme.colors.neutral.error : theme.colors.neutral.white};
     }
 
     .MuiInputBase-root {
-      color: ${({theme, $error }) => $error ? theme.colors.neutral.error : shade(0.1, '#fb6087')};
+      color: ${({theme, $error }) => $error ? theme.colors.neutral.error : theme.colors.neutral.white};
     }
   }
 `;
-

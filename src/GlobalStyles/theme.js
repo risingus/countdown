@@ -7,7 +7,7 @@ export const webTheme = {
     neutral: {
       white: '#ffffff',
       darkDesaturatedBlue: '#343650',
-      veryDarkBlue: '	#1e1f29',
+      veryDarkBlue: '#1e1f29',
       veryDark: '#211d2b',
       error: '#ff1744',
       timeCardColor: 'linear-gradient(0deg,'+ 
