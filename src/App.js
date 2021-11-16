@@ -27,7 +27,10 @@ function App() {
     const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
     const secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-    if (timeLeft < 0) {
+    const isCountDown = (window.location.href).toString().includes('countDown')
+
+    if (timeLeft <= 0 && isCountDown) {
+
       navigate('/');
     }
 

@@ -41,7 +41,6 @@ function isDateNew(date, time) {
   const today = new Date();
 
   const isAfter = moment(formDate).isAfter(today)
-  console.log(isAfter)
 
   return isAfter;
 
