@@ -52,7 +52,7 @@ export const CardContainer = styled.div`
           background: ${({ theme }) => theme.colors.neutral.darkDesaturatedBlue};
           margin: 0 0 .05rem 0;
           box-shadow: 0px 6px 0px -3px rgba(0, 0, 0, 0.1);
-          animation: ${({ isAnimated }) => isAnimated && '1s foldCard linear'};
+          animation: ${({ isAnimated }) => isAnimated && '.5s foldCard ease-in-out'};
           transform-origin: center bottom;
 
           display: flex;
