@@ -21,6 +21,7 @@ export const FooterContainer = styled.div`
   span {
     color: ${({theme }) => theme.colors.neutral.white};
     letter-spacing: .1rem;
+    font-size: .7em;
   }
 
   .footerLinks {

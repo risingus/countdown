@@ -22,9 +22,16 @@ export function TimeCard({time, text}) {
   return (
     <CardContainer isAnimated={animation}>
         <div className="timeContainer">
-          <div className="timeCard">
-            <h1>{time}</h1>
+            <div className="timeCardStatic">
+              <h1>{time}</h1>
+            </div>
+          <div className="topDiv">
+            <div className="timeCard">
+              <h1>{time}</h1>
+            </div>
           </div>
+          <div className="bottomDiv"></div>
+          
         </div>
         <span>
           {text}
