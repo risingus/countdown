@@ -10,6 +10,9 @@ export const webTheme = {
       veryDarkBlue: '	#1e1f29',
       veryDark: '#211d2b',
       error: '#ff1744',
+      timeCardColor: 'linear-gradient(0deg,'+ 
+      'transparent 50%,'+
+      '#fb6087  50%)',
     }
    
   },

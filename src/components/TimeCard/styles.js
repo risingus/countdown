@@ -16,29 +16,33 @@ export const CardContainer = styled.div`
         border-bottom-left-radius: 0.5rem;
 
 
+        .timeCardStatic {
+          position: absolute;
+
+          h1 {
+            color: ${({ theme }) => theme.colors.primary.softRed};
+            font-size: 1.8rem;
+            margin: 0;
+          }
+        }
+
+
         @keyframes foldCard {
           0% {
             transform: rotateX(0deg);
           }
-          30% {
-            transform: rotatex(90deg);
-          }
 
-          60% {
-            transform: rotatex(180deg);
-          }
-
-          90% {
-            transform: rotatex(270deg);
+          50%{
+            transform: rotateX(90deg);
           }
 
           100% {
-            transform: rotatex(360deg);
+            transform: rotateX(270deg);
           }
         }
 
-        ::before {
-          content: "";
+
+        .topDiv {
           width: 4rem;
           height: 2rem;
           border-bottom-left-radius: 0.5rem;
@@ -50,10 +54,26 @@ export const CardContainer = styled.div`
           box-shadow: 0px 6px 0px -3px rgba(0, 0, 0, 0.1);
           animation: ${({ isAnimated }) => isAnimated && '1s foldCard linear'};
           transform-origin: center bottom;
+
+          display: flex;
+          justify-content: center;
+
+          .timeCard {
+            position: absolute;
+
+            h1 {
+              background: ${({ theme }) => theme.colors.neutral.timeCardColor};
+              font-size: 1.8rem;
+              margin: .85rem 0 0 0;
+              background-clip: text;
+              -webkit-background-clip: text;
+              color: transparent;
+              width: min-content;
+            }
+        }
         }
 
-        ::after {
-          content: "";
+        .bottomDiv {
           width: 4rem;
           height: 2rem;
           border-bottom-left-radius: 0.4rem;
@@ -62,16 +82,6 @@ export const CardContainer = styled.div`
           border-top-right-radius: 0.5rem;
           background: ${({ theme }) => theme.colors.neutral.darkDesaturatedBlue};
           box-shadow: 0px -6px 0px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .timeCard {
-          position: absolute;
-
-          h1 {
-            color: ${({ theme }) => theme.colors.primary.softRed};
-            font-size: 1.8rem;
-            margin: 0;
-          }
         }
       }
 
@@ -85,25 +95,32 @@ export const CardContainer = styled.div`
 
       @media (min-width: 700px) {
         .timeContainer {
-          
-          ::before {
-            width: 5rem;
-            height: 3rem;
-          }
 
-          ::after {
-            width: 5rem;
-            height: 3rem;
-            background: ${({ theme }) => theme.colors.neutral.darkDesaturatedBlue};
-          }
-
-          .timeCard {
+          .timeCardStatic {
 
             h1 {
               color: ${({ theme }) => theme.colors.primary.softRed};
               font-size: 3rem;
               margin: 0;
             }
+          }
+          
+          .topDiv {
+            width: 5rem;
+            height: 3rem;
+
+            .timeCard {
+            h1 {
+              font-size: 3rem;
+              margin: 1rem 0 0 0;
+            }
+          }
+          }
+
+          .bottomDiv {
+            width: 5rem;
+            height: 3rem;
+            background: ${({ theme }) => theme.colors.neutral.darkDesaturatedBlue};
           }
         }
 
