@@ -87,7 +87,7 @@ function App() {
       setCountDown({})
 
       setTimeout(() => {
-        navigate('/editCountDown')
+        navigate('/')
         setIsLoading(false);
       }, 1000)
       return;
@@ -120,7 +120,7 @@ function App() {
       localStorage.removeItem('countDownConfig')
 
       setTimeout(() => {
-        navigate('/editCountDown')
+        navigate('/')
         setIsLoading(false);
       }, 1000)
       return;
