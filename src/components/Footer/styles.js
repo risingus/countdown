@@ -28,7 +28,7 @@ export const FooterContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    gap: 2rem;
+    gap: 1.5rem;
 
     .footerLink {
     text-decoration: none;

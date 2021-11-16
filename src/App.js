@@ -149,7 +149,7 @@ function App() {
           <Route 
             path="/" 
             element={
-              <InitialPage/>
+              <InitialPage isConfigured={localStorage.getItem('countDownConfig') !== null} />
             } 
           />
           <Route 

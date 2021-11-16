@@ -33,7 +33,7 @@ export const StyledDiv = styled.div`
 `;
 
 
-export function InitialPage() {
+export function InitialPage({isConfigured}) {
   return (
     <Base>
         <Title text="Just Anoter CountDown" /> 
@@ -45,9 +45,10 @@ export function InitialPage() {
             </Link>
             to start
           </span>
+
         </StyledDiv>
         
-      <Footer isEdit={false} />
+      <Footer isEdit={false} isConfigured={isConfigured} />
     </Base>
   );
 }
