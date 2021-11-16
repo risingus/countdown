@@ -75,13 +75,13 @@ export function EditCountDownForm({handleSaveForm}) {
     handleSaveForm(values)
     reset()
     clearErrors()
-    navigate('/')
+    navigate('/countDown')
   }
 
   function cancelForm() {
     reset()
     clearErrors()
-    navigate('/')
+    navigate('/countDown')
   }
 
   return (

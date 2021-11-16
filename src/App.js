@@ -7,6 +7,7 @@ import {Routes, Route} from 'react-router-dom';
 import { EditCountDownPage } from "./pages/EditCountDownPage";
 import { GlobalStyle } from "./GlobalStyles/globalTheme";
 import { webTheme } from "./GlobalStyles/theme";
+import { InitialPage } from "./pages/InitialPage";
 
 function App() {
   const navigate = useNavigate();
@@ -148,6 +149,12 @@ function App() {
           <Route 
             path="/" 
             element={
+              <InitialPage/>
+            } 
+          />
+          <Route 
+            path="/countDown" 
+            element={
               <CountDonwPage 
                 countDown={countDown} 
                 text={text} 
@@ -156,7 +163,7 @@ function App() {
             } 
           />
           <Route 
-            path="/editCountDown" 
+            path="/edit" 
             element={
               <EditCountDownPage 
                 handleSaveForm={handleSaveForm} 

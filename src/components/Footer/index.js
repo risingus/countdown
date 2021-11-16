@@ -41,7 +41,7 @@ export function Footer({isEdit}) {
 
       {
         isEdit === false && (
-          <Link alt="Edit CountDown" to="/editCountDown" className="footerLink">
+          <Link alt="Edit CountDown" to="/edit" className="footerLink">
             <FaRegEdit className="footerIcon" />
           </Link>
         )
