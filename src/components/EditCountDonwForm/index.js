@@ -3,8 +3,8 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import moment from 'moment';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import usLocale from 'date-fns/locale/en-US';
-import MobileDatePicker from '@mui/lab/MobileDatePicker';
-import MobileTimePicker from '@mui/lab/MobileTimePicker';
+import TimePicker from '@mui/lab/TimePicker';
+import DatePicker from '@mui/lab/DatePicker';
 import {useNavigate} from "react-router";
 import {Title} from '../Title'
 import { InputMessage, StyledForm, StyledButton } from "./styles";
@@ -135,7 +135,7 @@ export function EditCountDownForm({handleSaveForm}) {
               control={control}
               name="date"
               render={({field: {onChange, value, ref}}) => (
-                <MobileDatePicker
+                <DatePicker
                   className="datePicker"
                   views={['day', 'month', 'year']}
                   minDate={new Date()}
@@ -158,7 +158,7 @@ export function EditCountDownForm({handleSaveForm}) {
               control={control}
               name="time"
               render={({field: {onChange, value, ref}}) => (
-                <MobileTimePicker
+                <TimePicker
                   views={['hours', 'minutes', 'seconds']}
                   ampm={false}
                   inputFormat="HH:mm:ss"
