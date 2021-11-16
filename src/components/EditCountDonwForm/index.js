@@ -12,7 +12,22 @@ import { useForm, Controller } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InputMessageError } from "../InputMessageError";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { darken, lighten } from "polished";
 
+const themeSite = {
+  palette: {
+    mode: 'dark',
+    primary: {
+      light: lighten(0.2, '#fb6087'),
+      main: '#fb6087',
+      dark: darken(0.1, '#fb6087'),
+      contrastText: '#fff'
+    },
+  },
+}
+
+const materialTheme = createTheme(themeSite)
 
 function isDateNew(date, time) {
   const day = moment(date).get('date');
@@ -113,6 +128,7 @@ export function EditCountDownForm({handleSaveForm}) {
       </div>
 
       <div className="timeContainer">
+        <ThemeProvider theme={materialTheme} >
         <LocalizationProvider dateAdapter={AdapterDateFns} locale={usLocale}>
 
           <div className="inputContainer">
@@ -122,6 +138,7 @@ export function EditCountDownForm({handleSaveForm}) {
               render={({field: {onChange, value, ref}}) => (
                 <MobileDatePicker
                   className="datePicker"
+                  views={['day', 'year', 'month']}
                   minDate={new Date()}
                   fullWidth
                   inputRef={ref}
@@ -160,6 +177,7 @@ export function EditCountDownForm({handleSaveForm}) {
             
           </div>
         </LocalizationProvider>
+        </ThemeProvider>
       </div>
 
 
