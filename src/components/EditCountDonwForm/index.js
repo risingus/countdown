@@ -138,7 +138,7 @@ export function EditCountDownForm({handleSaveForm}) {
               render={({field: {onChange, value, ref}}) => (
                 <MobileDatePicker
                   className="datePicker"
-                  views={['day', 'year', 'month']}
+                  views={['day', 'month', 'year']}
                   minDate={new Date()}
                   fullWidth
                   inputRef={ref}
