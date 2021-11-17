@@ -36,7 +36,7 @@ export const StyledDiv = styled.div`
 export function InitialPage({isConfigured}) {
   return (
     <Base>
-        <Title text="Just Anoter CountDown" /> 
+        <Title text="Just Another CountDown" /> 
         <StyledDiv>
           <span>
             Click
