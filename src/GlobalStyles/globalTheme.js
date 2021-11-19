@@ -4,13 +4,13 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
   * {
     @font-face {
-      font-family: redHatBold;
+      font-family: redHatBold, sans-serif;
       src: url(RedHatText-Bold.ttf) format('truetype');
       font-weight: bold;
     }
 
     @font-face {
-      font-family: redHat;
+      font-family: redHat, sans-serif;
       src: url(RedHatText-Regular.ttf) format('truetype');
     }
 
@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
       background: ${({ theme }) => theme.colors.primary.softRed};
     }
 
-    font-family: redHatBold;
+    font-family: redHatBold, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
