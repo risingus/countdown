@@ -64,7 +64,7 @@ export const CardContainer = styled.div`
             h1 {
               background: ${({ theme }) => theme.colors.neutral.timeCardColor};
               font-size: 1.8rem;
-              margin: .85rem 0 0 0;
+              margin: 1rem 0 0 0;
               background-clip: text;
               -webkit-background-clip: text;
               color: transparent;
@@ -112,7 +112,7 @@ export const CardContainer = styled.div`
             .timeCard {
             h1 {
               font-size: 3rem;
-              margin: 1rem 0 0 0;
+              margin: 1.3rem 0 0 0;
             }
           }
           }
